@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevFit - Diário de Treino</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Dev<span>Fit</span></h1>
+            <p>Registre sua evolução diária</p>
+        </header>
+
+        <!-- Formulário de Cadastro -->
+        <main class="card-formulario">
+            <h2>Novo Exercício</h2>
+            <form id="form-treino">
+    <div class="campo">
+        <label for="exercicio">Exercício</label>
+        <input type="text" id="exercicio" placeholder="Ex: Supino Reto" required>
+    </div>
+
+    <!-- Novo campo adicionado aqui -->
+    <div class="campo">
+        <label for="dia-semana">Dia da Semana</label>
+        <select id="dia-semana" required>
+            <option value="Segunda-Feira">Segunda-Feira</option>
+            <option value="Terça-Feira">Terça-Feira</option>
+            <option value="Quarta-Feira">Quarta-Feira</option>
+            <option value="Quinta-Feira">Quinta-Feira</option>
+            <option value="Sexta-Feira">Sexta-Feira</option>
+            <option value="Sábado">Sábado</option>
+            <option value="Domingo">Domingo</option>
+        </select>
+    </div>
+
+    <div class="linhas-inputs">
+        <div class="campo">
+            <label for="carga">Carga (kg)</label>
+            <input type="number" id="carga" placeholder="0" required>
+        </div>
+        <div class="campo">
+            <label for="repeticoes">Reps</label>
+            <input type="number" id="repeticoes" placeholder="0" required>
+        </div>
+    </div>
+
+    <button type="submit">Registrar Treino</button>
+</form>
+<!-- A estrutura de exibição continua simples, o JS vai fazer o resto -->
+    <section class="secao-lista">
+        <div id="lista-treinos"></div>
+    </section>
+
+</main>
+</div>
+
+<script src ="script.js"></script>
+</body>
+</html>

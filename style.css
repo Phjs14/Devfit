@@ -1,0 +1,303 @@
+/* --- Variáveis de Design Premium (Dark Blue + Cyan) --- */
+:root {
+    --bg-fundo: #0b1120;      /* Azul quase preto */
+    --bg-card: #171e2e;       /* Cinza azulado escuro */
+    --bg-input: #1f293a;
+    --borda-card: #2d3748;
+    
+    --texto-principal: #f1f5f9;
+    --texto-secundario: #94a3b8;
+    
+    --cor-acento: #22d3ee;    /* Ciano vibrante */
+    --cor-acento-hover: #06b6d4;
+    --cor-perigo: #ef4444;    /* Vermelho */
+    
+    --sombra-card: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --raio-card: 16px;
+    --raio-input: 8px;
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    background-color: var(--bg-fundo);
+    color: var(--texto-principal);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo para rolagem natural */
+    min-height: 100vh;
+    padding: 20px;
+    padding-top: 40px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px; /* Estilo mobile-first fixo */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* --- Título do App --- */
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+header h1 span {
+    color: var(--cor-acento);
+}
+
+header p {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    margin-top: 2px;
+}
+
+/* --- Formulário de Cadastro --- */
+#card-formulario {
+    background-color: var(--bg-card);
+    padding: 25px;
+    border-radius: var(--raio-card);
+    border: 1px solid var(--borda-card);
+    box-shadow: var(--sombra-card);
+}
+
+#card-formulario h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--texto-principal);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.linhas-inputs {
+    display: flex;
+    gap: 15px;
+}
+
+.linhas-inputs .campo {
+    flex: 1;
+}
+
+label {
+    font-size: 0.8rem;
+    color: var(--texto-secundario);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input, select {
+    background-color: var(--bg-input);
+    border: 1.5px solid var(--borda-card);
+    color: var(--texto-principal);
+    padding: 12px 16px;
+    border-radius: var(--raio-input);
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+/* Remove a seta padrão do select no mobile para usar estilo próprio */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--cor-acento);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+}
+
+button[type="submit"] {
+    background-color: var(--cor-acento);
+    color: #000;
+    border: none;
+    padding: 15px;
+    border-radius: var(--raio-input);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--cor-acento-hover);
+    transform: translateY(-1px);
+}
+
+/* --- Lista de Treinos do Dia --- */
+#lista-treinos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cabecalho-dia {
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+.cabecalho-dia h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.cabecalho-dia h2 span {
+    color: var(--cor-acento);
+}
+
+.cabecalho-dia p {
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+}
+
+.grade-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* --- O Novo Card de Exercício --- */
+.card-treino {
+    background-color: var(--bg-card);
+    border: 1px solid var(--borda-card);
+    padding: 20px;
+    border-radius: var(--raio-card);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--sombra-card);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.card-treino:hover {
+    transform: translateX(3px);
+    border-color: var(--borda-card-hover, #4a5568);
+}
+
+.info-principal h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.tags-info {
+    display: flex;
+    gap: 10px;
+}
+
+.tag-carga, .tag-reps {
+    background-color: rgba(34, 211, 238, 0.1); /* Fundo ciano bem transparente */
+    color: var(--cor-acento);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.tag-reps {
+    background-color: rgba(148, 163, 184, 0.1);
+    color: var(--texto-secundario);
+}
+
+/* Botão Deletar (Lixeira) */
+.btn-deletar {
+    background: transparent;
+    border: none;
+    color: var(--texto-secundario);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    opacity: 0.6;
+}
+
+.btn-deletar:hover {
+    background-color: rgba(239, 64, 64, 0.1);
+    color: var(--cor-perigo);
+    opacity: 1;
+}
+
+/* Card Vazio (Feedback) */
+.card-vazio {
+    background-color: var(--bg-card);
+    border: 2px dashed var(--borda-card);
+    border-radius: var(--raio-card);
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--texto-secundario);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-vazio p {
+    font-size: 0.95rem;
+    max-width: 300px;
+}
+/* --- Animação e Estilo de Exercício Concluído --- */
+
+/* Quando o card recebe a classe .concluido */
+.card-treino.concluido {
+    background-color: #111827; /* Fica um pouco mais escuro */
+    border-color: #10b981; /* Borda verde */
+    opacity: 0.6; /* Efeito opaco de item feito */
+    transform: scale(0.98);
+    animation: pulsarConcluido 0.3s ease-out; /* Dispara a animação ao clicar */
+}
+
+/* Risca o nome do exercício concluído */
+.card-treino.concluido .info-principal h3 {
+    text-decoration: line-through;
+    color: var(--texto-secundario);
+}
+
+/* Muda a cor das tags para verde indicando sucesso */
+.card-treino.concluido .tag-carga {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+/* Animação de pulso/impacto ao marcar */
+@keyframes pulsarConcluido {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+    }
+    50% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.98);
+    }
+}
