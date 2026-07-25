@@ -1,63 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevFit - Diário de Treino</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevFit - Gerador & Diário de Treino</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Dev<span>Fit</span></h1>
-            <p>Registre sua evolução diária</p>
-        </header>
+  <!-- TELA 1: SELEÇÃO DE FREQUÊNCIA -->
+  <section id="setup-treino" class="card-setup">
+    <h2>🎯 Qual é a sua frequência de treino?</h2>
+    <p>Escolha quantos dias você pretende ir à academia por semana:</p>
+    
+    <div class="botoes-dias">
+      <button onclick="gerarTreinoSugerido(3)">3 Dias (Push / Pull / Legs)</button>
+      <button onclick="gerarTreinoSugerido(4)">4 Dias (Upper / Lower)</button>
+      <button onclick="gerarTreinoSugerido(5)">5 Dias (ABCDE / Completo)</button>
+    </div>
 
-        <!-- Formulário de Cadastro -->
-        <main class="card-formulario">
-            <h2>Novo Exercício</h2>
-            <form id="form-treino">
-    <div class="campo">
+    <div class="opcao-custom">
+      <button id="btn-custom" onclick="gerarTreinoSugerido(0)">
+        ⚙️ Prefiro montar meu treino do zero
+      </button>
+    </div>
+  </section>
+
+
+  <!-- TELA 2: PAINEL DE TREINOS EM ABAS (Inicia escondido) -->
+  <section id="painel-principal" class="container escondido">
+    <header class="header-painel">
+      <button onclick="voltarParaSetup()" class="btn-voltar">← Alterar Dias</button>
+      <div>
+        <h1>Dev<span>Fit</span></h1>
+        <p id="subtitulo-plano">Seu plano de treino da semana</p>
+      </div>
+    </header>
+
+    <!-- Navegação por Abas (Dias da Semana) -->
+    <div id="abas-dias" class="abas-container">
+      <!-- Os botões das abas (Seg, Ter, Qua...) serão criados dinamicamente via JS -->
+    </div>
+
+    <!-- Conteúdo do Dia Selecionado -->
+    <div id="conteudo-dia" class="card-dia">
+      <!-- Os exercícios do dia clicado aparecerão aqui -->
+    </div>
+
+    <!-- Botão retrátil para adicionar novos exercícios -->
+    <div class="area-add-extra">
+      <button onclick="toggleFormulario()" class="btn-add-outline">+ Adicionar exercício a este dia</button>
+    </div>
+
+    <!-- Formulário do Exercício (Apenas abre se a pessoa clicar no botão acima) -->
+    <form id="form-treino" class="form-compacto escondido">
+      <h3>Adicionar Exercício Personalizado</h3>
+      
+      <div class="campo">
         <label for="exercicio">Exercício</label>
         <input type="text" id="exercicio" placeholder="Ex: Supino Reto" required>
-    </div>
+      </div>
 
-    <!-- Novo campo adicionado aqui -->
-    <div class="campo">
-        <label for="dia-semana">Dia da Semana</label>
-        <select id="dia-semana" required>
-            <option value="Segunda-Feira">Segunda-Feira</option>
-            <option value="Terça-Feira">Terça-Feira</option>
-            <option value="Quarta-Feira">Quarta-Feira</option>
-            <option value="Quinta-Feira">Quinta-Feira</option>
-            <option value="Sexta-Feira">Sexta-Feira</option>
-            <option value="Sábado">Sábado</option>
-            <option value="Domingo">Domingo</option>
-        </select>
-    </div>
-
-    <div class="linhas-inputs">
+      <div class="inputs-inline">
         <div class="campo">
-            <label for="carga">Carga (kg)</label>
-            <input type="number" id="carga" placeholder="0" required>
+          <label for="carga">Carga (kg)</label>
+          <input type="number" id="carga" placeholder="0" required>
         </div>
         <div class="campo">
-            <label for="repeticoes">Reps</label>
-            <input type="number" id="repeticoes" placeholder="0" required>
+          <label for="reps">Reps</label>
+          <input type="number" id="reps" placeholder="0" required>
         </div>
-    </div>
+      </div>
 
-    <button type="submit">Registrar Treino</button>
-</form>
-<!-- A estrutura de exibição continua simples, o JS vai fazer o resto -->
-    <section class="secao-lista">
-        <div id="lista-treinos"></div>
-    </section>
+      <button type="submit" class="btn-salvar">Salvar no Dia Clicado</button>
+    </form>
+  </section>
 
-</main>
-</div>
-
-<script src ="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

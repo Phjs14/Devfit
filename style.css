@@ -1,303 +1,304 @@
-/* --- Variáveis de Design Premium (Dark Blue + Cyan) --- */
-:root {
-    --bg-fundo: #0b1120;      /* Azul quase preto */
-    --bg-card: #171e2e;       /* Cinza azulado escuro */
-    --bg-input: #1f293a;
-    --borda-card: #2d3748;
-    
-    --texto-principal: #f1f5f9;
-    --texto-secundario: #94a3b8;
-    
-    --cor-acento: #22d3ee;    /* Ciano vibrante */
-    --cor-acento-hover: #06b6d4;
-    --cor-perigo: #ef4444;    /* Vermelho */
-    
-    --sombra-card: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-    --raio-card: 16px;
-    --raio-input: 8px;
-}
-
-/* Reset Básico */
+/* RESET & ESTILOS GERAIS */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: var(--bg-fundo);
-    color: var(--texto-principal);
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Alinha no topo para rolagem natural */
-    min-height: 100vh;
-    padding: 20px;
-    padding-top: 40px;
+  background-color: #0f172a;
+  color: #f8fafc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .container {
-    width: 100%;
-    max-width: 500px; /* Estilo mobile-first fixo */
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  width: 100%;
+  max-width: 550px;
+  background-color: #1e293b;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-/* --- Título do App --- */
-header {
-    text-align: center;
+.escondido {
+  display: none !important;
 }
 
-header h1 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: -1.5px;
+/* TELA 1: SETUP DE FREQUÊNCIA */
+.card-setup {
+  background-color: #1e293b;
+  border-radius: 16px;
+  padding: 30px 24px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-header h1 span {
-    color: var(--cor-acento);
+.card-setup h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #38bdf8;
 }
 
-header p {
-    color: var(--texto-secundario);
-    font-size: 0.95rem;
-    margin-top: 2px;
+.card-setup p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-bottom: 24px;
 }
 
-/* --- Formulário de Cadastro --- */
-#card-formulario {
-    background-color: var(--bg-card);
-    padding: 25px;
-    border-radius: var(--raio-card);
-    border: 1px solid var(--borda-card);
-    box-shadow: var(--sombra-card);
+.botoes-dias {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-#card-formulario h2 {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: var(--texto-principal);
+.botoes-dias button {
+  background-color: #0284c7;
+  color: #ffffff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.botoes-dias button:hover {
+  background-color: #0369a1;
+  transform: translateY(-2px);
+}
+
+.opcao-custom {
+  margin-top: 20px;
+  border-top: 1px solid #334155;
+  padding-top: 16px;
+}
+
+#btn-custom {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px dashed #475569;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+#btn-custom:hover {
+  color: #f8fafc;
+  border-color: #38bdf8;
+}
+
+/* TELA 2: HEADER E NAV DE ABAS */
+.header-painel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 16px;
+}
+
+.header-painel h1 {
+  font-size: 1.5rem;
+}
+
+.header-painel h1 span {
+  color: #38bdf8;
+}
+
+.header-painel p {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.btn-voltar {
+  background: #334155;
+  border: none;
+  color: #cbd5e1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-voltar:hover {
+  background: #475569;
+  color: #fff;
+}
+
+/* ABAS DE DIAS DA SEMANA */
+.abas-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.aba-btn {
+  background-color: #0f172a;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  padding: 10px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.aba-btn:hover {
+  border-color: #38bdf8;
+  color: #f8fafc;
+}
+
+.aba-btn.ativa {
+  background-color: #38bdf8;
+  color: #0f172a;
+  border-color: #38bdf8;
+}
+
+/* LISTA DE EXERCÍCIOS */
+.card-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 180px;
+}
+
+.item-exercicio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f172a;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border-left: 4px solid #38bdf8;
+}
+
+.item-exercicio .info h4 {
+  font-size: 1rem;
+  color: #f8fafc;
+  margin-bottom: 4px;
+}
+
+.item-exercicio .info p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.acoes-exercicio button {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #cbd5e1;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-left: 4px;
+  transition: all 0.2s;
+}
+
+.acoes-exercicio button:hover {
+  background: #334155;
+}
+
+/* ÁREA DE ADICIONAR E FORMULÁRIO */
+.area-add-extra {
+  margin-top: 16px;
+}
+
+.btn-add-outline {
+  background: transparent;
+  border: 1px dashed #475569;
+  color: #94a3b8;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-add-outline:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.form-compacto {
+  background: #0f172a;
+  padding: 16px;
+  border-radius: 10px;
+  margin-top: 12px;
+  border: 1px solid #334155;
+}
+
+.form-compacto h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #38bdf8;
 }
 
 .campo {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
-.linhas-inputs {
-    display: flex;
-    gap: 15px;
+.campo label {
+  font-size: 0.8rem;
+  color: #94a3b8;
 }
 
-.linhas-inputs .campo {
-    flex: 1;
+.campo input {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  padding: 10px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
 }
 
-label {
-    font-size: 0.8rem;
-    color: var(--texto-secundario);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+.campo input:focus {
+  border-color: #38bdf8;
 }
 
-input, select {
-    background-color: var(--bg-input);
-    border: 1.5px solid var(--borda-card);
-    color: var(--texto-principal);
-    padding: 12px 16px;
-    border-radius: var(--raio-input);
-    font-size: 1rem;
-    transition: all 0.2s;
+.inputs-inline {
+  display: flex;
+  gap: 12px;
 }
 
-/* Remove a seta padrão do select no mobile para usar estilo próprio */
-select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 40px;
+.inputs-inline .campo {
+  flex: 1;
 }
 
-input:focus, select:focus {
-    outline: none;
-    border-color: var(--cor-acento);
-    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+.btn-salvar {
+  background-color: #10b981;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 4px;
 }
 
-button[type="submit"] {
-    background-color: var(--cor-acento);
-    color: #000;
-    border: none;
-    padding: 15px;
-    border-radius: var(--raio-input);
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    margin-top: 10px;
-}
-
-button[type="submit"]:hover {
-    background-color: var(--cor-acento-hover);
-    transform: translateY(-1px);
-}
-
-/* --- Lista de Treinos do Dia --- */
-#lista-treinos {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.cabecalho-dia {
-    margin-bottom: 10px;
-    padding-left: 5px;
-}
-
-.cabecalho-dia h2 {
-    font-size: 1.4rem;
-    font-weight: 700;
-}
-
-.cabecalho-dia h2 span {
-    color: var(--cor-acento);
-}
-
-.cabecalho-dia p {
-    color: var(--texto-secundario);
-    font-size: 0.9rem;
-}
-
-.grade-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* --- O Novo Card de Exercício --- */
-.card-treino {
-    background-color: var(--bg-card);
-    border: 1px solid var(--borda-card);
-    padding: 20px;
-    border-radius: var(--raio-card);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: var(--sombra-card);
-    transition: transform 0.2s, border-color 0.2s;
-}
-
-.card-treino:hover {
-    transform: translateX(3px);
-    border-color: var(--borda-card-hover, #4a5568);
-}
-
-.info-principal h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-
-.tags-info {
-    display: flex;
-    gap: 10px;
-}
-
-.tag-carga, .tag-reps {
-    background-color: rgba(34, 211, 238, 0.1); /* Fundo ciano bem transparente */
-    color: var(--cor-acento);
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 5px 10px;
-    border-radius: 20px;
-}
-
-.tag-reps {
-    background-color: rgba(148, 163, 184, 0.1);
-    color: var(--texto-secundario);
-}
-
-/* Botão Deletar (Lixeira) */
-.btn-deletar {
-    background: transparent;
-    border: none;
-    color: var(--texto-secundario);
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-    transition: all 0.2s;
-    opacity: 0.6;
-}
-
-.btn-deletar:hover {
-    background-color: rgba(239, 64, 64, 0.1);
-    color: var(--cor-perigo);
-    opacity: 1;
-}
-
-/* Card Vazio (Feedback) */
-.card-vazio {
-    background-color: var(--bg-card);
-    border: 2px dashed var(--borda-card);
-    border-radius: var(--raio-card);
-    padding: 40px 20px;
-    text-align: center;
-    color: var(--texto-secundario);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-.card-vazio p {
-    font-size: 0.95rem;
-    max-width: 300px;
-}
-/* --- Animação e Estilo de Exercício Concluído --- */
-
-/* Quando o card recebe a classe .concluido */
-.card-treino.concluido {
-    background-color: #111827; /* Fica um pouco mais escuro */
-    border-color: #10b981; /* Borda verde */
-    opacity: 0.6; /* Efeito opaco de item feito */
-    transform: scale(0.98);
-    animation: pulsarConcluido 0.3s ease-out; /* Dispara a animação ao clicar */
-}
-
-/* Risca o nome do exercício concluído */
-.card-treino.concluido .info-principal h3 {
-    text-decoration: line-through;
-    color: var(--texto-secundario);
-}
-
-/* Muda a cor das tags para verde indicando sucesso */
-.card-treino.concluido .tag-carga {
-    background-color: rgba(16, 185, 129, 0.1);
-    color: #10b981;
-}
-
-/* Animação de pulso/impacto ao marcar */
-@keyframes pulsarConcluido {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-    }
-    50% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-    }
-    100% {
-        transform: scale(0.98);
-    }
+.btn-salvar:hover {
+  background-color: #059669;
 }
