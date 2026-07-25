@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DevFit - Diário de Treino</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Configurações PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
 
@@ -87,8 +91,42 @@
       </form>
 
     </div>
+    <!-- SEÇÃO DE RECOMENDADOS / AFILIADOS -->
+      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <h3 style="font-size: 1rem; margin-bottom: 12px; opacity: 0.9;">🛒 Recomendados para o Treino</h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          
+          <!-- CARD 1: CREATINA -->
+          <a href="#" target="_blank" style="text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-weight: bold; font-size: 0.9rem; color: #38bdf8;">⚡ Creatina Monohidratada</div>
+              <div style="font-size: 0.75rem; opacity: 0.7; margin-top: 2px;">Aumento de força e desempenho</div>
+            </div>
+            <span style="background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 5px; font-weight: bold;">Ver Oferta</span>
+          </a>
+
+          <!-- CARD 2: WHEY PROTEIN -->
+          <a href="#" target="_blank" style="text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-weight: bold; font-size: 0.9rem; color: #38bdf8;">🥤 Whey Protein</div>
+              <div style="font-size: 0.75rem; opacity: 0.7; margin-top: 2px;">Recuperação e ganho de massa</div>
+            </div>
+            <span style="background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 5px; font-weight: bold;">Ver Oferta</span>
+          </a>
+
+        </div>
+      </div>
   </div>
 
   <script src="script.js"></script>
+  <!-- REGISTRO DO PWA -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>
