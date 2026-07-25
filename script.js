@@ -2,124 +2,122 @@
 const treinosBase = {
   3: {
     "Segunda-Feira (Push)": [
-      { id: 1, exercicio: "Supino Reto c/ Barra", carga: 30, reps: 10 },
-      { id: 2, exercicio: "Supino Inclinado c/ Halteres", carga: 18, reps: 10 },
-      { id: 3, exercicio: "Desenvolvimento c/ Halteres", carga: 14, reps: 10 },
-      { id: 4, exercicio: "Elevação Lateral", carga: 8, reps: 12 },
-      { id: 5, exercicio: "Tríceps Pulley Corda", carga: 15, reps: 12 },
-      { id: 6, exercicio: "Tríceps Testa", carga: 10, reps: 10 }
+      { id: 1, exercicio: "Supino Reto c/ Barra", carga: 30, reps: 10, concluido: false },
+      { id: 2, exercicio: "Supino Inclinado c/ Halteres", carga: 18, reps: 10, concluido: false },
+      { id: 3, exercicio: "Desenvolvimento c/ Halteres", carga: 14, reps: 10, concluido: false },
+      { id: 4, exercicio: "Elevação Lateral", carga: 8, reps: 12, concluido: false },
+      { id: 5, exercicio: "Tríceps Pulley Corda", carga: 15, reps: 12, concluido: false },
+      { id: 6, exercicio: "Tríceps Testa", carga: 10, reps: 10, concluido: false }
     ],
     "Quarta-Feira (Pull)": [
-      { id: 7, exercicio: "Puxada Frontal Aberta", carga: 40, reps: 10 },
-      { id: 8, exercicio: "Remada Curvada c/ Barra", carga: 25, reps: 10 },
-      { id: 9, exercicio: "Remada Baixa Triângulo", carga: 35, reps: 12 },
-      { id: 10, exercicio: "Crucifixo Invertido Máquina", carga: 20, reps: 12 },
-      { id: 11, exercicio: "Rosca Direta c/ Barra W", carga: 12, reps: 10 },
-      { id: 12, exercicio: "Rosca Martelo", carga: 10, reps: 12 }
+      { id: 7, exercicio: "Puxada Frontal Aberta", carga: 40, reps: 10, concluido: false },
+      { id: 8, exercicio: "Remada Curvada c/ Barra", carga: 25, reps: 10, concluido: false },
+      { id: 9, exercicio: "Remada Baixa Triângulo", carga: 35, reps: 12, concluido: false },
+      { id: 10, exercicio: "Crucifixo Invertido Máquina", carga: 20, reps: 12, concluido: false },
+      { id: 11, exercicio: "Rosca Direta c/ Barra W", carga: 12, reps: 10, concluido: false },
+      { id: 12, exercicio: "Rosca Martelo", carga: 10, reps: 12, concluido: false }
     ],
     "Sexta-Feira (Legs)": [
-      { id: 13, exercicio: "Agachamento Livre", carga: 40, reps: 10 },
-      { id: 14, exercicio: "Leg Press 45°", carga: 100, reps: 12 },
-      { id: 15, exercicio: "Cadeira Extensora", carga: 30, reps: 12 },
-      { id: 16, exercicio: "Mesa Flexora", carga: 25, reps: 12 },
-      { id: 17, exercicio: "Panturrilha em Pé", carga: 50, reps: 15 }
+      { id: 13, exercicio: "Agachamento Livre", carga: 40, reps: 10, concluido: false },
+      { id: 14, exercicio: "Leg Press 45°", carga: 100, reps: 12, concluido: false },
+      { id: 15, exercicio: "Cadeira Extensora", carga: 30, reps: 12, concluido: false },
+      { id: 16, exercicio: "Mesa Flexora", carga: 25, reps: 12, concluido: false },
+      { id: 17, exercicio: "Panturrilha em Pé", carga: 50, reps: 15, concluido: false }
     ]
   },
   4: {
     "Segunda-Feira (Upper A)": [
-      { id: 1, exercicio: "Supino Reto c/ Barra", carga: 30, reps: 10 },
-      { id: 2, exercicio: "Puxada Frontal Aberta", carga: 40, reps: 10 },
-      { id: 3, exercicio: "Desenvolvimento c/ Halteres", carga: 14, reps: 10 },
-      { id: 4, exercicio: "Remada Curvada c/ Barra", carga: 25, reps: 10 },
-      { id: 5, exercicio: "Tríceps Pulley Corda", carga: 20, reps: 12 },
-      { id: 6, exercicio: "Rosca Direta c/ Barra W", carga: 12, reps: 12 }
+      { id: 1, exercicio: "Supino Reto c/ Barra", carga: 30, reps: 10, concluido: false },
+      { id: 2, exercicio: "Puxada Frontal Aberta", carga: 40, reps: 10, concluido: false },
+      { id: 3, exercicio: "Desenvolvimento c/ Halteres", carga: 14, reps: 10, concluido: false },
+      { id: 4, exercicio: "Remada Curvada c/ Barra", carga: 25, reps: 10, concluido: false },
+      { id: 5, exercicio: "Tríceps Pulley Corda", carga: 20, reps: 12, concluido: false },
+      { id: 6, exercicio: "Rosca Direta c/ Barra W", carga: 12, reps: 12, concluido: false }
     ],
     "Terça-Feira (Lower A)": [
-      { id: 7, exercicio: "Agachamento Livre", carga: 40, reps: 10 },
-      { id: 8, exercicio: "Leg Press 45°", carga: 100, reps: 12 },
-      { id: 9, exercicio: "Cadeira Extensora", carga: 30, reps: 12 },
-      { id: 10, exercicio: "Stiff c/ Barra", carga: 20, reps: 10 },
-      { id: 11, exercicio: "Panturrilha em Pé", carga: 40, reps: 15 }
+      { id: 7, exercicio: "Agachamento Livre", carga: 40, reps: 10, concluido: false },
+      { id: 8, exercicio: "Leg Press 45°", carga: 100, reps: 12, concluido: false },
+      { id: 9, exercicio: "Cadeira Extensora", carga: 30, reps: 12, concluido: false },
+      { id: 10, exercicio: "Stiff c/ Barra", carga: 20, reps: 10, concluido: false },
+      { id: 11, exercicio: "Panturrilha em Pé", carga: 40, reps: 15, concluido: false }
     ],
     "Quinta-Feira (Upper B)": [
-      { id: 12, exercicio: "Supino Inclinado c/ Halteres", carga: 18, reps: 10 },
-      { id: 13, exercicio: "Remada Baixa Triângulo", carga: 35, reps: 10 },
-      { id: 14, exercicio: "Elevação Lateral", carga: 8, reps: 12 },
-      { id: 15, exercicio: "Crucifixo Reto", carga: 12, reps: 12 },
-      { id: 16, exercicio: "Tríceps Testa", carga: 10, reps: 10 },
-      { id: 17, exercicio: "Rosca Martelo", carga: 10, reps: 12 }
+      { id: 12, exercicio: "Supino Inclinado c/ Halteres", carga: 18, reps: 10, concluido: false },
+      { id: 13, exercicio: "Remada Baixa Triângulo", carga: 35, reps: 10, concluido: false },
+      { id: 14, exercicio: "Elevação Lateral", carga: 8, reps: 12, concluido: false },
+      { id: 15, exercicio: "Crucifixo Reto", carga: 12, reps: 12, concluido: false },
+      { id: 16, exercicio: "Tríceps Testa", carga: 10, reps: 10, concluido: false },
+      { id: 17, exercicio: "Rosca Martelo", carga: 10, reps: 12, concluido: false }
     ],
     "Sexta-Feira (Lower B)": [
-      { id: 18, exercicio: "Leg Press 45°", carga: 120, reps: 10 },
-      { id: 19, exercicio: "Afundo c/ Halteres", carga: 12, reps: 10 },
-      { id: 20, exercicio: "Mesa Flexora", carga: 25, reps: 12 },
-      { id: 21, exercicio: "Cadeira Extensora", carga: 35, reps: 12 },
-      { id: 22, exercicio: "Panturrilha em Pé", carga: 30, reps: 15 }
+      { id: 18, exercicio: "Leg Press 45°", carga: 120, reps: 10, concluido: false },
+      { id: 19, exercicio: "Afundo c/ Halteres", carga: 12, reps: 10, concluido: false },
+      { id: 20, exercicio: "Mesa Flexora", carga: 25, reps: 12, concluido: false },
+      { id: 21, exercicio: "Cadeira Extensora", carga: 35, reps: 12, concluido: false },
+      { id: 22, exercicio: "Panturrilha em Pé", carga: 30, reps: 15, concluido: false }
     ]
   },
   5: {
     "Segunda-Feira (Peito)": [
-      { id: 1, exercicio: "Supino Reto c/ Barra", carga: 30, reps: 10 },
-      { id: 2, exercicio: "Supino Inclinado c/ Halteres", carga: 18, reps: 10 },
-      { id: 3, exercicio: "Crucifixo Reto", carga: 12, reps: 12 },
-      { id: 4, exercicio: "Crossover no Cabo", carga: 15, reps: 12 },
-      { id: 5, exercicio: "Flexão de Braço", carga: 0, reps: 15 }
+      { id: 1, exercicio: "Supino Reto c/ Barra", carga: 30, reps: 10, concluido: false },
+      { id: 2, exercicio: "Supino Inclinado c/ Halteres", carga: 18, reps: 10, concluido: false },
+      { id: 3, exercicio: "Crucifixo Reto", carga: 12, reps: 12, concluido: false },
+      { id: 4, exercicio: "Crossover no Cabo", carga: 15, reps: 12, concluido: false },
+      { id: 5, exercicio: "Flexão de Braço", carga: 0, reps: 15, concluido: false }
     ],
     "Terça-Feira (Costas)": [
-      { id: 6, exercicio: "Puxada Frontal Aberta", carga: 40, reps: 10 },
-      { id: 7, exercicio: "Remada Curvada c/ Barra", carga: 25, reps: 10 },
-      { id: 8, exercicio: "Remada Baixa Triângulo", carga: 35, reps: 12 },
-      { id: 9, exercicio: "Pulloff no Cabo", carga: 20, reps: 12 },
-      { id: 10, exercicio: "Encolhimento c/ Halteres", carga: 24, reps: 15 }
+      { id: 6, exercicio: "Puxada Frontal Aberta", carga: 40, reps: 10, concluido: false },
+      { id: 7, exercicio: "Remada Curvada c/ Barra", carga: 25, reps: 10, concluido: false },
+      { id: 8, exercicio: "Remada Baixa Triângulo", carga: 35, reps: 12, concluido: false },
+      { id: 9, exercicio: "Pulloff no Cabo", carga: 20, reps: 12, concluido: false },
+      { id: 10, exercicio: "Encolhimento c/ Halteres", carga: 24, reps: 15, concluido: false }
     ],
     "Quarta-Feira (Pernas)": [
-      { id: 11, exercicio: "Agachamento Livre", carga: 40, reps: 10 },
-      { id: 12, exercicio: "Leg Press 45°", carga: 100, reps: 12 },
-      { id: 13, exercicio: "Cadeira Extensora", carga: 30, reps: 12 },
-      { id: 14, exercicio: "Mesa Flexora", carga: 25, reps: 12 },
-      { id: 15, exercicio: "Stiff c/ Barra", carga: 20, reps: 10 },
-      { id: 16, exercicio: "Panturrilha em Pé", carga: 40, reps: 15 }
+      { id: 11, exercicio: "Agachamento Livre", carga: 40, reps: 10, concluido: false },
+      { id: 12, exercicio: "Leg Press 45°", carga: 100, reps: 12, concluido: false },
+      { id: 13, exercicio: "Cadeira Extensora", carga: 30, reps: 12, concluido: false },
+      { id: 14, exercicio: "Mesa Flexora", carga: 25, reps: 12, concluido: false },
+      { id: 15, exercicio: "Stiff c/ Barra", carga: 20, reps: 10, concluido: false },
+      { id: 16, exercicio: "Panturrilha em Pé", carga: 40, reps: 15, concluido: false }
     ],
     "Quinta-Feira (Ombros)": [
-      { id: 17, exercicio: "Desenvolvimento c/ Halteres", carga: 14, reps: 10 },
-      { id: 18, exercicio: "Elevação Lateral", carga: 8, reps: 12 },
-      { id: 19, exercicio: "Elevação Frontal", carga: 8, reps: 12 },
-      { id: 20, exercicio: "Crucifixo Invertido Máquina", carga: 20, reps: 12 }
+      { id: 17, exercicio: "Desenvolvimento c/ Halteres", carga: 14, reps: 10, concluido: false },
+      { id: 18, exercicio: "Elevação Lateral", carga: 8, reps: 12, concluido: false },
+      { id: 19, exercicio: "Elevação Frontal", carga: 8, reps: 12, concluido: false },
+      { id: 20, exercicio: "Crucifixo Invertido Máquina", carga: 20, reps: 12, concluido: false }
     ],
     "Sexta-Feira (Braços)": [
-      { id: 21, exercicio: "Rosca Direta c/ Barra W", carga: 12, reps: 10 },
-      { id: 22, exercicio: "Tríceps Pulley Corda", carga: 18, reps: 10 },
-      { id: 23, exercicio: "Rosca Alternada", carga: 10, reps: 10 },
-      { id: 24, exercicio: "Tríceps Testa", carga: 10, reps: 10 },
-      { id: 25, exercicio: "Rosca Martelo", carga: 10, reps: 12 },
-      { id: 26, exercicio: "Tríceps Francês", carga: 12, reps: 12 }
+      { id: 21, exercicio: "Rosca Direta c/ Barra W", carga: 12, reps: 10, concluido: false },
+      { id: 22, exercicio: "Tríceps Pulley Corda", carga: 18, reps: 10, concluido: false },
+      { id: 23, exercicio: "Rosca Alternada", carga: 10, reps: 10, concluido: false },
+      { id: 24, exercicio: "Tríceps Testa", carga: 10, reps: 10, concluido: false },
+      { id: 25, exercicio: "Rosca Martelo", carga: 10, reps: 12, concluido: false },
+      { id: 26, exercicio: "Tríceps Francês", carga: 12, reps: 12, concluido: false }
     ]
   }
 };
 
-// SUGESTÕES POR GRUPO MUSCULAR
 const bancoSugestoes = {
-  peito: ["Supino Reto c/ Barra", "Supino Inclinado c/ Halteres", "Crucifixo Reto", "Crossover no Cabo", "Flexão de Braço"],
-  costas: ["Puxada Frontal Aberta", "Remada Curvada c/ Barra", "Remada Baixa Triângulo", "Pulloff no Cabo", "Encolhimento c/ Halteres"],
+  peito: ["Supino Reto c/ Barra", "Supino Inclinado c/ Halteres", "Supino Declinado", "Crucifixo Reto", "Crossover no Cabo", "Flexão de Braço"],
+  costas: ["Puxada Frontal Aberta", "Remada Curvada c/ Barra", "Remada Baixa Triângulo", "Pulloff no Cabo", "Encolhimento c/ Halteres", "Remada Cavalinho"],
   pernas: ["Agachamento Livre", "Leg Press 45°", "Cadeira Extensora", "Mesa Flexora", "Stiff c/ Barra", "Panturrilha em Pé", "Afundo c/ Halteres"],
-  ombros: ["Desenvolvimento c/ Halteres", "Elevação Lateral", "Elevação Frontal", "Crucifixo Invertido Máquina"],
-  biceps: ["Rosca Direta c/ Barra W", "Rosca Martelo", "Rosca Alternada"],
-  triceps: ["Tríceps Pulley Corda", "Tríceps Testa", "Tríceps Francês"]
+  ombros: ["Desenvolvimento c/ Halteres", "Elevação Lateral", "Elevação Frontal", "Crucifixo Invertido Máquina", "Desenvolvimento Arnold"],
+  biceps: ["Rosca Direta c/ Barra W", "Rosca Martelo", "Rosca Alternada", "Rosca Scott", "Rosca Concentrada"],
+  triceps: ["Tríceps Pulley Corda", "Tríceps Testa", "Tríceps Francês", "Tríceps Coice", "Mergulho no Banco"]
 };
 
 function obterGrupoMuscular(nomeExercicio) {
-  if (!nomeExercicio) return null;
-  const nomeLower = nomeExercicio.toLowerCase();
-  
-  if (nomeLower.includes("supino") || nomeLower.includes("crucifixo reto") || nomeLower.includes("crossover") || nomeLower.includes("flexão")) return "peito";
-  if (nomeLower.includes("puxada") || nomeLower.includes("remada") || nomeLower.includes("pulloff") || nomeLower.includes("encolhimento")) return "costas";
-  if (nomeLower.includes("agachamento") || nomeLower.includes("leg press") || nomeLower.includes("extensora") || nomeLower.includes("flexora") || nomeLower.includes("stiff") || nomeLower.includes("panturrilha") || nomeLower.includes("afundo")) return "pernas";
-  if (nomeLower.includes("desenvolvimento") || nomeLower.includes("elevação") || nomeLower.includes("invertido")) return "ombros";
-  if (nomeLower.includes("rosca")) return "biceps";
-  if (nomeLower.includes("tríceps")) return "triceps";
-  
+  const nome = nomeExercicio.toLowerCase();
+  if (nome.includes("supino") || nome.includes("crucifixo reto") || nome.includes("crossover") || nome.includes("flexão")) return "peito";
+  if (nome.includes("puxada") || nome.includes("remada") || nome.includes("pulloff") || nome.includes("encolhimento")) return "costas";
+  if (nome.includes("agachamento") || nome.includes("leg press") || nome.includes("extensora") || nome.includes("flexora") || nome.includes("stiff") || nome.includes("panturrilha") || nome.includes("afundo")) return "pernas";
+  if (nome.includes("desenvolvimento") || nome.includes("elevação") || nome.includes("invertido")) return "ombros";
+  if (nome.includes("rosca")) return "biceps";
+  if (nome.includes("tríceps") || nome.includes("mergulho")) return "triceps";
   return null;
 }
+
+const todosExercicios = Object.values(bancoSugestoes).flat();
 
 // 2. ESTADO DA APLICAÇÃO
 let planoAtual = {};
@@ -150,6 +148,7 @@ function renderizarTelas() {
 
     renderizarAbas();
     renderizarExerciciosDoDia();
+    configurarAutocompleteInputForm();
   }
 }
 
@@ -173,12 +172,14 @@ function renderizarAbas() {
   });
 }
 
-// 5. MOSTRAR EXERCÍCIOS DO DIA
+// 5. MOSTRAR EXERCÍCIOS DO DIA E ATUALIZAR BARRA
 function renderizarExerciciosDoDia() {
   const containerConteudo = document.getElementById('conteudo-dia');
   containerConteudo.innerHTML = '';
 
   const lista = planoAtual[diaAtivo] || [];
+
+  atualizarBarraProgresso(lista);
 
   if (lista.length === 0) {
     containerConteudo.innerHTML = `<p style="color:#888; text-align:center; padding: 20px;">Nenhum exercício cadastrado para este dia.</p>`;
@@ -187,20 +188,20 @@ function renderizarExerciciosDoDia() {
 
   lista.forEach((item, index) => {
     const card = document.createElement('div');
-    card.className = 'item-exercicio';
+    card.className = `item-exercicio ${item.concluido ? 'concluido' : ''}`;
 
     if (idEditando === index) {
       const grupo = obterGrupoMuscular(item.exercicio);
-      const listaFiltrada = grupo ? bancoSugestoes[grupo] : Object.values(bancoSugestoes).flat();
+      const listaFiltrada = grupo ? bancoSugestoes[grupo] : todosExercicios;
       const opcoesDatalist = listaFiltrada.map(ex => `<option value="${ex}">`).join('');
 
       card.classList.add('modo-edicao');
       card.innerHTML = `
         <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-          <label style="font-size: 0.75rem; color: #007acc;">Nome do Exercício:</label>
-          <input type="text" id="edit-nome-${index}" list="sugestoes-list" value="${item.exercicio}" placeholder="Ex: Supino Reto" style="padding: 8px; border-radius: 6px; border: 1px solid #007acc; background: #1e1e1e; color: #fff; outline: none;">
+          <label style="font-size: 0.75rem; color: #007acc;">Trocar por outro de ${grupo ? grupo.toUpperCase() : 'mesmo grupo'}:</label>
+          <input type="text" id="edit-nome-${index}" list="lista-grupo-${index}" value="${item.exercicio}" placeholder="Digite para filtrar..." style="padding: 8px; border-radius: 6px; border: 1px solid #007acc; background: #1e1e1e; color: #fff; outline: none;">
           
-          <datalist id="sugestoes-list">
+          <datalist id="lista-grupo-${index}">
             ${opcoesDatalist}
           </datalist>
 
@@ -223,9 +224,12 @@ function renderizarExerciciosDoDia() {
       `;
     } else {
       card.innerHTML = `
-        <div class="info">
-          <h4>${item.exercicio}</h4>
-          <p>🏋️ <strong>${item.carga} kg</strong> | 🔄 <strong>${item.reps} reps</strong></p>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <input type="checkbox" ${item.concluido ? 'checked' : ''} onchange="toggleConcluido(${index})" style="width: 20px; height: 20px; cursor: pointer; accent-color: #10b981;">
+          <div class="info" style="${item.concluido ? 'opacity: 0.5; text-decoration: line-through;' : ''}">
+            <h4>${item.exercicio}</h4>
+            <p>🏋️ <strong>${item.carga} kg</strong> | 🔄 <strong>${item.reps} reps</strong></p>
+          </div>
         </div>
         <div class="acoes-exercicio">
           <button onclick="ativarEdicao(${index})">✏️ Editar</button>
@@ -238,7 +242,46 @@ function renderizarExerciciosDoDia() {
   });
 }
 
-// 6. FUNÇÕES DE EDIÇÃO E GERENCIAMENTO
+// 6. FUNÇÃO DA BARRA DE PROGRESSO
+function atualizarBarraProgresso(lista) {
+  const barra = document.getElementById('barra-progresso');
+  const texto = document.getElementById('texto-progresso');
+
+  if (!barra || !texto) return;
+
+  if (lista.length === 0) {
+    barra.style.width = '0%';
+    texto.innerText = '0%';
+    return;
+  }
+
+  const concluidos = lista.filter(item => item.concluido).length;
+  const porcentagem = Math.round((concluidos / lista.length) * 100);
+
+  barra.style.width = `${porcentagem}%`;
+  texto.innerText = `${porcentagem}% (${concluidos}/${lista.length})`;
+}
+
+function toggleConcluido(index) {
+  planoAtual[diaAtivo][index].concluido = !planoAtual[diaAtivo][index].concluido;
+  salvarEAtualizar();
+}
+
+// 7. DEMAIS FUNÇÕES
+function configurarAutocompleteInputForm() {
+  const exercicioInput = document.getElementById('exercicio');
+  if (exercicioInput) {
+    let datalistForm = document.getElementById('lista-todos-exercicios');
+    if (!datalistForm) {
+      datalistForm = document.createElement('datalist');
+      datalistForm.id = 'lista-todos-exercicios';
+      datalistForm.innerHTML = todosExercicios.map(ex => `<option value="${ex}">`).join('');
+      document.body.appendChild(datalistForm);
+    }
+    exercicioInput.setAttribute('list', 'lista-todos-exercicios');
+  }
+}
+
 function ativarEdicao(index) {
   idEditando = index;
   renderizarExerciciosDoDia();
@@ -302,7 +345,8 @@ document.getElementById('form-treino').addEventListener('submit', (e) => {
     id: Date.now(),
     exercicio: exercicioInput.value,
     carga: Number(cargaInput.value) || 0,
-    reps: Number(repsInput.value) || 0
+    reps: Number(repsInput.value) || 0,
+    concluido: false
   };
 
   if (!planoAtual[diaAtivo]) {

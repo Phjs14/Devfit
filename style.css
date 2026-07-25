@@ -302,3 +302,13 @@ body {
 .btn-salvar:hover {
   background-color: #059669;
 }
+.opcoes-dias {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.opcoes-dias button {
+  width: 100%;
+}

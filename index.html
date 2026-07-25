@@ -3,78 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevFit - Gerador & Diário de Treino</title>
+  <title>DevFit - Diário de Treino</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- TELA 1: SELEÇÃO DE FREQUÊNCIA -->
-  <section id="setup-treino" class="card-setup">
-    <h2>🎯 Qual é a sua frequência de treino?</h2>
-    <p>Escolha quantos dias você pretende ir à academia por semana:</p>
+  <div class="container">
     
-    <div class="botoes-dias">
-      <button onclick="gerarTreinoSugerido(3)">3 Dias (Push / Pull / Legs)</button>
-      <button onclick="gerarTreinoSugerido(4)">4 Dias (Upper / Lower)</button>
-      <button onclick="gerarTreinoSugerido(5)">5 Dias (ABCDE / Completo)</button>
-    </div>
-
-    <div class="opcao-custom">
-      <button id="btn-custom" onclick="gerarTreinoSugerido(0)">
-        ⚙️ Prefiro montar meu treino do zero
-      </button>
-    </div>
-  </section>
-
-
-  <!-- TELA 2: PAINEL DE TREINOS EM ABAS (Inicia escondido) -->
-  <section id="painel-principal" class="container escondido">
-    <header class="header-painel">
-      <button onclick="voltarParaSetup()" class="btn-voltar">← Alterar Dias</button>
-      <div>
-        <h1>Dev<span>Fit</span></h1>
-        <p id="subtitulo-plano">Seu plano de treino da semana</p>
-      </div>
-    </header>
-
-    <!-- Navegação por Abas (Dias da Semana) -->
-    <div id="abas-dias" class="abas-container">
-      <!-- Os botões das abas (Seg, Ter, Qua...) serão criados dinamicamente via JS -->
-    </div>
-
-    <!-- Conteúdo do Dia Selecionado -->
-    <div id="conteudo-dia" class="card-dia">
-      <!-- Os exercícios do dia clicado aparecerão aqui -->
-    </div>
-
-    <!-- Botão retrátil para adicionar novos exercícios -->
-    <div class="area-add-extra">
-      <button onclick="toggleFormulario()" class="btn-add-outline">+ Adicionar exercício a este dia</button>
-    </div>
-
-    <!-- Formulário do Exercício (Apenas abre se a pessoa clicar no botão acima) -->
-    <form id="form-treino" class="form-compacto escondido">
-      <h3>Adicionar Exercício Personalizado</h3>
+    <!-- TELA 1: SETUP E SELEÇÃO DE FREQUÊNCIA -->
+    <div id="setup-treino">
+      <h2>🎯 Qual é a sua frequência de treino?</h2>
+      <p class="subtitulo" style="margin-bottom: 20px;">Escolha quantos dias você pode ir para a academia por semana:</p>
       
-      <div class="campo">
-        <label for="exercicio">Exercício</label>
-        <input type="text" id="exercicio" placeholder="Ex: Supino Reto" required>
+      <div class="opcoes-dias" style="display: flex; flex-direction: column; gap: 12px;">
+        <button onclick="gerarTreinoSugerido(3)" style="background: #0066ff; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">
+          3 Dias (Push / Pull / Legs)
+        </button>
+        
+        <button onclick="gerarTreinoSugerido(4)" style="background: #0066ff; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">
+          4 Dias (Upper / Lower)
+        </button>
+        
+        <button onclick="gerarTreinoSugerido(5)" style="background: #0066ff; color: #ffffff; border: none; padding: 14px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%;">
+          5 Dias (ABCDE / Divisão Completa)
+        </button>
+        
+        <button onclick="gerarTreinoSugerido(0)" class="btn-zero" style="background: transparent; color: #ffffff; border: 2px dashed rgba(255, 255, 255, 0.3); padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 5px;">
+          ⚙️ Prefiro montar meu treino do zero
+        </button>
+      </div>
+    </div>
+
+    <!-- TELA 2: PAINEL PRINCIPAL DO TREINO -->
+    <div id="painel-principal" class="escondido">
+      
+      <header>
+        <h1>💪 DevFit</h1>
+        <p>Gerenciador de Treinos</p>
+      </header>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <button onclick="voltarParaSetup()" style="background: transparent; color: #94a3b8; border: none; cursor: pointer; font-size: 0.85rem;">← Alterar Frequência</button>
       </div>
 
-      <div class="inputs-inline">
-        <div class="campo">
-          <label for="carga">Carga (kg)</label>
-          <input type="number" id="carga" placeholder="0" required>
+      <!-- Abas dos Dias -->
+      <div id="abas-dias" class="container-abas"></div>
+
+      <!-- BARRA DE PROGRESSO DO TREINO -->
+      <div id="container-progresso" style="margin: 15px 0; background: #1e293b; padding: 12px; border-radius: 8px; border: 1px solid #334155;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">
+          <span>Progresso do Treino</span>
+          <span id="texto-progresso" style="font-weight: bold; color: #38bdf8;">0%</span>
         </div>
-        <div class="campo">
-          <label for="reps">Reps</label>
-          <input type="number" id="reps" placeholder="0" required>
+        <div style="width: 100%; background: #0f172a; height: 10px; border-radius: 5px; overflow: hidden;">
+          <div id="barra-progresso" style="width: 0%; height: 100%; background: #10b981; transition: width 0.3s ease;"></div>
         </div>
       </div>
 
-      <button type="submit" class="btn-salvar">Salvar no Dia Clicado</button>
-    </form>
-  </section>
+      <!-- Lista de Exercícios -->
+      <div id="conteudo-dia"></div>
+
+      <!-- Botão e Formulário de Adicionar Exercício -->
+      <button onclick="toggleFormulario()" class="btn-adicionar" style="margin-top: 15px; width: 100%; padding: 12px; background: #0284c7; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">+ Adicionar Exercício</button>
+
+      <form id="form-treino" class="escondido" style="margin-top: 15px; background: #1e293b; padding: 15px; border-radius: 8px; border: 1px solid #334155;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div>
+            <label style="font-size: 0.8rem; color: #94a3b8;">Exercício:</label>
+            <input type="text" id="exercicio" placeholder="Ex: Supino Reto" required style="width: 100%; padding: 8px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 4px; box-sizing: border-box;">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+              <label style="font-size: 0.8rem; color: #94a3b8;">Carga (kg):</label>
+              <input type="number" id="carga" placeholder="0" required style="width: 100%; padding: 8px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 4px; box-sizing: border-box;">
+            </div>
+            <div style="flex: 1;">
+              <label style="font-size: 0.8rem; color: #94a3b8;">Repetições:</label>
+              <input type="number" id="reps" placeholder="10" required style="width: 100%; padding: 8px; background: #0f172a; border: 1px solid #334155; color: white; border-radius: 4px; box-sizing: border-box;">
+            </div>
+          </div>
+          <button type="submit" style="padding: 10px; background: #10b981; color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: 5px;">Salvar Exercício</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
