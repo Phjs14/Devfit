@@ -2,16 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>DevFit - Diário de Treino</title>
   <link rel="stylesheet" href="style.css">
   <!-- Configurações PWA -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Chart.js para o gráfico de evolução -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
+<!-- ABA 1: HOME (Seu treino atual) -->
+<section id="aba-home" class="aba-conteudo">
   <div class="container">
     
     <!-- TELA 1: SETUP E SELEÇÃO DE FREQUÊNCIA -->
@@ -118,7 +121,88 @@
         </div>
       </div>
   </div>
+</section> <!-- FECHA A ABA HOME -->
 
+   <!-- ABA 2: EVOLUÇÃO -->
+  <section id="aba-evolucao" class="aba-conteudo" style="display: none;">
+    <div style="padding: 20px; color: white;">
+      <h2 style="font-size: 1.3rem; margin-bottom: 5px; color: #38bdf8;">📈 Evolução de Carga</h2>
+      <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px;">Acompanhe o seu ganho de força ao longo do tempo.</p>
+
+      <!-- Gráfico de Cargas -->
+      <div class="card-painel" style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 16px;">
+        <select id="select-exercicio" onchange="atualizarGrafico()" style="width: 100%; padding: 10px; border-radius: 8px; background: #0f172a; color: #fff; border: 1px solid #334155; margin-bottom: 12px; outline: none;"></select>
+        <div style="height: 220px; position: relative;">
+          <canvas id="graficoEvolucao"></canvas>
+        </div>
+      </div>
+
+      <!-- CONTAINER DE PRs (Com busca e scroll interno) -->
+      <div class="card-painel" style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <h3 style="font-size: 1rem; color: #f8fafc; margin: 0;">🏆 Recordes Pessoais (PRs)</h3>
+        </div>
+        
+        <!-- Campo de Busca -->
+        <input 
+          type="text" 
+          id="busca-pr" 
+          placeholder="🔍 Buscar exercício no PR..." 
+          oninput="filtrarPRs()"
+          style="width: 100%; padding: 8px 12px; border-radius: 8px; background: #0f172a; color: #fff; border: 1px solid #334155; margin-bottom: 10px; font-size: 0.85rem; outline: none;"
+        >
+
+        <!-- Lista com Limite de Altura e Rolagem -->
+        <div id="lista-prs" style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px;"></div>
+      </div>
+    </div>
+  </section>
+
+   <!-- ABA 3: HISTÓRICO / CALENDÁRIO -->
+<section id="aba-historico" class="aba-conteudo" style="display: none;">
+  <div style="padding: 20px; color: white;">
+    <h2 style="font-size: 1.3rem; margin-bottom: 5px; color: #38bdf8;">📅 Calendário de Treinos</h2>
+    <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px;">Veja a sua frequência no mês atual.</p>
+
+    <!-- Card de Estatística -->
+    <div style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+      <div>
+        <span style="font-size: 0.8rem; color: #94a3b8; display: block;">Treinos neste mês</span>
+        <strong id="qtd-treinos-mes" style="font-size: 1.5rem; color: #38bdf8;">0</strong>
+      </div>
+      <span style="font-size: 2rem;">💪</span>
+    </div>
+
+    <!-- Mês/Ano e Grade do Calendário -->
+    <div style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155;">
+      <h3 id="titulo-mes-ano" style="font-size: 1rem; text-align: center; margin-bottom: 15px; color: #f8fafc; text-transform: capitalize;"></h3>
+      
+      <!-- Cabeçalho dos dias -->
+      <div style="display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; font-size: 0.75rem; color: #64748b; font-weight: bold; margin-bottom: 10px;">
+        <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+      </div>
+
+      <!-- Grade de dias -->
+      <div id="grid-calendario" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center;"></div>
+    </div>
+  </div>
+</section>
+
+   <!-- BARRA FIXA NO RODAPÉ -->
+   <nav class="bottom-nav">
+     <button class="nav-btn active" id="btn-home" onclick="trocarAba('home')">
+       <span>🏠</span>
+       <span>Treino</span>
+     </button>
+     <button class="nav-btn" id="btn-evolucao" onclick="trocarAba('evolucao')">
+       <span>📈</span>
+       <span>Evolução</span>
+     </button>
+     <button class="nav-btn" id="btn-historico" onclick="trocarAba('historico')">
+       <span>📅</span>
+       <span>Histórico</span>
+     </button>
+   </nav>
   <script src="script.js"></script>
   <!-- REGISTRO DO PWA -->
   <script>
@@ -128,5 +212,71 @@
       });
     }
   </script>
+  
+  <!-- MODAL DE DETALHES DO TREINO (Colocar antes do </body>) -->
+<div id="modal-detalhes-dia" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
+  <div style="background: #1e293b; border-radius: 12px; padding: 20px; width: 100%; max-width: 350px; border: 1px solid #334155; position: relative;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h3 id="modal-data-titulo" style="margin: 0; color: #38bdf8; font-size: 1.1rem;">Treino do dia</h3>
+      <button onclick="fecharModalTreino()" style="background: transparent; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer;">✕</button>
+    </div>
+    <ul id="lista-exercicios-dia" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;"></ul>
+  </div>
+</div>
+
+<!-- BOTÃO FLUTUANTE DO TIMER -->
+<button id="btn-timer-flutuante" onclick="abrirModalTimer()" style="position: fixed; bottom: 85px; right: 20px; background: #0284c7; color: white; border: none; border-radius: 50%; width: 55px; height: 55px; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4); cursor: pointer; z-index: 99; display: flex; align-items: center; justify-content: center;">
+  ⏱️
+</button>
+
+<!-- MODAL DO TIMER REFEITO -->
+<div id="modal-timer" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
+  <div style="background: #1e293b; border-radius: 16px; padding: 24px; width: 100%; max-width: 300px; border: 1px solid #334155; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <h3 style="margin: 0; color: #38bdf8; font-size: 1.1rem; display: flex; align-items: center; gap: 6px;">⏱️ Descanso</h3>
+      <button onclick="fecharModalTimer()" style="background: transparent; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer;">✕</button>
+    </div>
+
+    <!-- Display do Tempo (Corrigido sem 'my') -->
+    <div id="display-timer" style="font-size: 3.8rem; font-weight: bold; color: #f8fafc; font-family: monospace; margin: 10px 0; line-height: 1;">01:00</div>
+
+    <!-- Ajuste Rápido (-10s / +30s) -->
+    <div style="display: flex; gap: 8px; justify-content: center; margin: 15px 0 10px 0;">
+      <button onclick="ajustarTempoTimer(-10)" style="flex: 1; background: #334155; color: #ef4444; border: 1px solid #475569; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer;">-10s</button>
+      <button onclick="ajustarTempoTimer(30)" style="flex: 1; background: #334155; color: #38bdf8; border: 1px solid #475569; padding: 8px; border-radius: 6px; font-weight: bold; cursor: pointer;">+30s</button>
+    </div>
+
+    <!-- Presets de Tempo Fixo -->
+    <div style="display: flex; gap: 6px; justify-content: center; margin-bottom: 20px;">
+      <button onclick="definirTempoTimer(30)" style="flex: 1; background: #0f172a; color: #94a3b8; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">30s</button>
+      <button onclick="definirTempoTimer(60)" style="flex: 1; background: #0f172a; color: #94a3b8; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">60s</button>
+      <button onclick="definirTempoTimer(90)" style="flex: 1; background: #0f172a; color: #94a3b8; border: 1px solid #334155; padding: 6px; border-radius: 6px; font-size: 0.85rem; cursor: pointer;">90s</button>
+    </div>
+
+    <!-- Botões de Controle Principal -->
+    <div style="display: flex; gap: 10px;">
+      <button id="btn-start-timer" onclick="alternarTimer()" style="flex: 2; background: #22c55e; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer;">Iniciar</button>
+      <button onclick="resetarTimer()" style="flex: 1; background: #475569; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;">🔄</button>
+    </div>
+
+  </div>
+</div>
+  
+<!-- MODAL DE CARD STORIES -->
+<div id="modal-stories" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
+  <div id="card-stories-conteudo" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 2px solid #38bdf8; border-radius: 20px; padding: 25px; width: 100%; max-width: 330px; text-align: center; box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);">
+    <span style="font-size: 2.5rem;">🔥</span>
+    <h2 style="color: #f8fafc; font-size: 1.4rem; margin: 10px 0 5px 0;">Treino Finalizado!</h2>
+    <p id="stories-data" style="color: #38bdf8; font-size: 0.85rem; margin-bottom: 15px;"></p>
+    
+    <div id="stories-resumo-exercicios" style="background: #0f172a; padding: 12px; border-radius: 10px; font-size: 0.85rem; color: #cbd5e1; text-align: left; margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px;"></div>
+    
+    <p style="color: #64748b; font-size: 0.75rem; margin-bottom: 15px;">📸 Tire um print e compartilhe nos stories!</p>
+    
+    <button onclick="fecharModalStories()" style="width: 100%; background: #38bdf8; color: #0f172a; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer;">Fechar</button>
+  </div>
+</div>
+
 </body>
 </html>

@@ -312,3 +312,63 @@ body {
 .opcoes-dias button {
   width: 100%;
 }
+/* ESPAÇAMENTO E ESTILO DA BARRA INFERIOR */
+body {
+  padding-bottom: 75px !important;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #0f172a;
+  border-top: 1px solid #334155;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0;
+  z-index: 9999;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  width: 33%;
+  transition: color 0.2s ease;
+}
+
+.nav-btn span:first-child {
+  font-size: 1.2rem;
+}
+
+.nav-btn.active {
+  color: #38bdf8;
+  font-weight: bold;
+}
+/* Estilos do Calendário */
+.dia-cal {
+  padding: 8px 0;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: #0f172a;
+  color: #64748b;
+}
+
+.dia-cal.treinado {
+  background: #0284c7;
+  color: #ffffff;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+.dia-cal.hoje {
+  border: 1px solid #38bdf8;
+}
