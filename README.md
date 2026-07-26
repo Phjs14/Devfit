@@ -61,5 +61,9 @@ O **Devfit** é uma aplicação web (PWA) moderna, leve e responsiva desenvolvid
 Você pode testar a aplicação diretamente no navegador:
 👉 [Acessar Devfit no GitHub Pages](https://phjs14.github.io/Devfit/)
 
-Você pode testar a aplicação diretamente no navegador:
-👉 [Acessar Devfit no GitHub Pages](https://phjs14.github.io/Devfit/)
+
+
+
+
+
+
