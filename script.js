@@ -885,7 +885,36 @@ function importarDados(e) {
 document.addEventListener('DOMContentLoaded', () => {
   renderizarTelas();
 });
+// LÓGICA DA CALCULADORA DE SUPLEMENTAÇÃO
+document.addEventListener('DOMContentLoaded', () => {
+  const btnCalcular = document.getElementById('btn-calcular-suple');
+  
+  if (btnCalcular) {
+    btnCalcular.addEventListener('click', () => {
+      const pesoInput = document.getElementById('peso-usuario');
+      const peso = parseFloat(pesoInput.value);
 
+      if (!peso || peso <= 0) {
+        alert('Por favor, insira um peso válido!');
+        return;
+      }
+
+      // Cálculos recomendados:
+      // Creatina: ~0.07g por kg
+      // Proteína: ~2.0g por kg (meta de hipertrofia)
+      const doseCreatina = (peso * 0.07).toFixed(1);
+      const doseProteina = Math.round(peso * 2.0);
+
+      // Exibe os valores na tela
+      document.getElementById('res-creatina').innerText = `${doseCreatina}g / dia`;
+      document.getElementById('res-proteina').innerText = `${doseProteina}g / dia`;
+
+      // Mostra o container de resultados
+      const caixaResultado = document.getElementById('resultado-calc');
+      caixaResultado.classList.remove('escondido');
+    });
+  }
+});
 
 
   

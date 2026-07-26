@@ -10,9 +10,10 @@
   <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <!-- Chart.js para o gráfico de evolução -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
 <!-- ABA 1: HOME (Seu treino atual) -->
 <section id="aba-home" class="aba-conteudo">
   <div class="container">
@@ -94,71 +95,71 @@
       </form>
 
     </div>
-    <!-- SEÇÃO DE RECOMENDADOS / AFILIADOS -->
-      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-        <h3 style="font-size: 1rem; margin-bottom: 12px; opacity: 0.9;">🛒 Recomendados para o Treino</h3>
-        
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          
-          <!-- CARD 1: CREATINA -->
-          <a href="#" target="_blank" style="text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
-            <div>
-              <div style="font-weight: bold; font-size: 0.9rem; color: #38bdf8;">⚡ Creatina Monohidratada</div>
-              <div style="font-size: 0.75rem; opacity: 0.7; margin-top: 2px;">Aumento de força e desempenho</div>
-            </div>
-            <span style="background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 5px; font-weight: bold;">Ver Oferta</span>
-          </a>
 
-          <!-- CARD 2: WHEY PROTEIN -->
-          <a href="#" target="_blank" style="text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
-            <div>
-              <div style="font-weight: bold; font-size: 0.9rem; color: #38bdf8;">🥤 Whey Protein</div>
-              <div style="font-size: 0.75rem; opacity: 0.7; margin-top: 2px;">Recuperação e ganho de massa</div>
-            </div>
-            <span style="background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 5px; font-weight: bold;">Ver Oferta</span>
-          </a>
+    <!-- SEÇÃO DE RECOMENDADOS NA HOME -->
+    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+      <h3 style="font-size: 1rem; margin-bottom: 12px; opacity: 0.9;">🛒 Recomendados para o Treino</h3>
+      
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- CARD 1: CREATINA -->
+        <a id="home-link-creatina" href="#" target="_blank" style="text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-weight: bold; font-size: 0.9rem; color: #38bdf8;">⚡ Creatina Monohidratada</div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-top: 2px;">Aumento de força e desempenho</div>
+          </div>
+          <span style="background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 5px; font-weight: bold;">Ver Oferta</span>
+        </a>
 
-        </div>
+        <!-- CARD 2: WHEY PROTEIN -->
+        <a id="home-link-whey" href="#" target="_blank" style="text-decoration: none; color: inherit; background: rgba(255, 255, 255, 0.05); padding: 12px 15px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-weight: bold; font-size: 0.9rem; color: #38bdf8;">🥤 Whey Protein</div>
+            <div style="font-size: 0.75rem; opacity: 0.7; margin-top: 2px;">Recuperação e ganho de massa</div>
+          </div>
+          <span style="background: #0284c7; color: white; font-size: 0.75rem; padding: 6px 10px; border-radius: 5px; font-weight: bold;">Ver Oferta</span>
+        </a>
       </div>
+    </div>
+
   </div>
 </section> <!-- FECHA A ABA HOME -->
 
-   <!-- ABA 2: EVOLUÇÃO -->
-  <section id="aba-evolucao" class="aba-conteudo" style="display: none;">
-    <div style="padding: 20px; color: white;">
-      <h2 style="font-size: 1.3rem; margin-bottom: 5px; color: #38bdf8;">📈 Evolução de Carga</h2>
-      <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px;">Acompanhe o seu ganho de força ao longo do tempo.</p>
+<!-- ABA 2: EVOLUÇÃO -->
+<section id="aba-evolucao" class="aba-conteudo" style="display: none;">
+  <div style="padding: 20px; color: white;">
+    <h2 style="font-size: 1.3rem; margin-bottom: 5px; color: #38bdf8;">📈 Evolução de Carga</h2>
+    <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 20px;">Acompanhe o seu ganho de força ao longo do tempo.</p>
 
-      <!-- Gráfico de Cargas -->
-      <div class="card-painel" style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 16px;">
-        <select id="select-exercicio" onchange="atualizarGrafico()" style="width: 100%; padding: 10px; border-radius: 8px; background: #0f172a; color: #fff; border: 1px solid #334155; margin-bottom: 12px; outline: none;"></select>
-        <div style="height: 220px; position: relative;">
-          <canvas id="graficoEvolucao"></canvas>
-        </div>
-      </div>
-
-      <!-- CONTAINER DE PRs (Com busca e scroll interno) -->
-      <div class="card-painel" style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <h3 style="font-size: 1rem; color: #f8fafc; margin: 0;">🏆 Recordes Pessoais (PRs)</h3>
-        </div>
-        
-        <!-- Campo de Busca -->
-        <input 
-          type="text" 
-          id="busca-pr" 
-          placeholder="🔍 Buscar exercício no PR..." 
-          oninput="filtrarPRs()"
-          style="width: 100%; padding: 8px 12px; border-radius: 8px; background: #0f172a; color: #fff; border: 1px solid #334155; margin-bottom: 10px; font-size: 0.85rem; outline: none;"
-        >
-
-        <!-- Lista com Limite de Altura e Rolagem -->
-        <div id="lista-prs" style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px;"></div>
+    <!-- Gráfico de Cargas -->
+    <div class="card-painel" style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 16px;">
+      <select id="select-exercicio" onchange="atualizarGrafico()" style="width: 100%; padding: 10px; border-radius: 8px; background: #0f172a; color: #fff; border: 1px solid #334155; margin-bottom: 12px; outline: none;"></select>
+      <div style="height: 220px; position: relative;">
+        <canvas id="graficoEvolucao"></canvas>
       </div>
     </div>
-  </section>
 
-   <!-- ABA 3: HISTÓRICO / CALENDÁRIO -->
+    <!-- CONTAINER DE PRs -->
+    <div class="card-painel" style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <h3 style="font-size: 1rem; color: #f8fafc; margin: 0;">🏆 Recordes Pessoais (PRs)</h3>
+      </div>
+      
+      <!-- Campo de Busca -->
+      <input 
+        type="text" 
+        id="busca-pr" 
+        placeholder="🔍 Buscar exercício no PR..." 
+        oninput="filtrarPRs()"
+        style="width: 100%; padding: 8px 12px; border-radius: 8px; background: #0f172a; color: #fff; border: 1px solid #334155; margin-bottom: 10px; font-size: 0.85rem; outline: none;"
+      >
+
+      <!-- Lista com Limite de Altura e Rolagem -->
+      <div id="lista-prs" style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABA 3: HISTÓRICO / CALENDÁRIO -->
 <section id="aba-historico" class="aba-conteudo" style="display: none;">
   <div style="padding: 20px; color: white;">
     <h2 style="font-size: 1.3rem; margin-bottom: 5px; color: #38bdf8;">📅 Calendário de Treinos</h2>
@@ -188,32 +189,100 @@
   </div>
 </section>
 
-   <!-- BARRA FIXA NO RODAPÉ -->
-   <nav class="bottom-nav">
-     <button class="nav-btn active" id="btn-home" onclick="trocarAba('home')">
-       <span>🏠</span>
-       <span>Treino</span>
-     </button>
-     <button class="nav-btn" id="btn-evolucao" onclick="trocarAba('evolucao')">
-       <span>📈</span>
-       <span>Evolução</span>
-     </button>
-     <button class="nav-btn" id="btn-historico" onclick="trocarAba('historico')">
-       <span>📅</span>
-       <span>Histórico</span>
-     </button>
-   </nav>
-  <script src="script.js"></script>
-  <!-- REGISTRO DO PWA -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-      });
-    }
-  </script>
-  
-  <!-- MODAL DE DETALHES DO TREINO (Colocar antes do </body>) -->
+<!-- ABA 4: FERRAMENTAS & NUTRIÇÃO (NOVA) -->
+<section id="aba-ferramentas" class="aba-conteudo" style="display: none;">
+  <div style="padding: 20px; color: white;">
+    <h2 style="font-size: 1.3rem; margin-bottom: 5px; color: #38bdf8;">⚡ Calculadora de Suplementação</h2>
+    <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px;">Calcule sua dose diária e veja recomendações testadas.</p>
+
+    <div class="card-painel" style="background: #1e293b; padding: 15px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 20px;">
+      <div style="margin-bottom: 12px;">
+        <label for="peso-usuario" style="display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 6px;">Seu Peso Atual (kg):</label>
+        <input type="number" id="peso-usuario" placeholder="Ex: 70" min="30" max="200" style="width: 100%; padding: 10px; border-radius: 8px; background: #0f172a; color: white; border: 1px solid #334155; box-sizing: border-box; outline: none;">
+      </div>
+      <button id="btn-calcular-suple" style="width: 100%; padding: 12px; background: #38bdf8; color: #0f172a; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">Calcular Dose</button>
+    </div>
+
+    <!-- Resultado do Cálculo -->
+    <div id="resultado-calc" class="escondido" style="background: #1e293b; padding: 15px; border-radius: 12px; border-left: 4px solid #38bdf8; margin-bottom: 20px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+        <span>💧 Creatina Diária:</span>
+        <strong id="res-creatina" style="color: #38bdf8;">0g</strong>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+        <span>🥩 Proteína Diária (Meta):</span>
+        <strong id="res-proteina" style="color: #38bdf8;">0g</strong>
+      </div>
+
+      <!-- Link de Afiliado Contextual -->
+      <div style="margin-top: 15px; background: #0f172a; padding: 12px; border-radius: 8px;">
+        <p style="font-size: 0.85rem; margin-bottom: 8px; color: #f8fafc;">💡 <strong>Recomendação de Creatina Pura (Menor preço/g):</strong></p>
+        <a id="link-creatina" href="#" target="_blank" rel="noopener noreferrer" style="display: block; text-align: center; background: #f59e0b; color: #0f172a; font-weight: bold; padding: 10px; border-radius: 6px; text-decoration: none;">
+          🛒 Ver Creatina Aprovada em Laudo
+        </a>
+      </div>
+    </div>
+
+    <!-- VITRINE DE EQUIPAMENTOS (AFILIADOS) -->
+    <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: #f8fafc;">🏋️‍♂️ Kit do Maromba (Recomendados)</h3>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 12px; border-radius: 8px; border: 1px solid #334155;">
+        <div>
+          <h4 style="margin: 0 0 4px 0; font-size: 0.95rem;">Strap de Pano / Couro</h4>
+          <p style="font-size: 0.75rem; color: #94a3b8; margin: 0;">Essencial pra pegada no terra e puxadas.</p>
+        </div>
+        <a id="link-strap" href="#" target="_blank" rel="noopener noreferrer" style="background: transparent; color: #38bdf8; border: 1px solid #38bdf8; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; white-space: nowrap; font-weight: bold;">
+          Ver ↗
+        </a>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; background: #1e293b; padding: 12px; border-radius: 8px; border: 1px solid #334155;">
+        <div>
+          <h4 style="margin: 0 0 4px 0; font-size: 0.95rem;">Balança de Precisão (Dieta)</h4>
+          <p style="font-size: 0.75rem; color: #94a3b8; margin: 0;">Impossível bater macros sem pesagem exata.</p>
+        </div>
+        <a id="link-balanca" href="#" target="_blank" rel="noopener noreferrer" style="background: transparent; color: #38bdf8; border: 1px solid #38bdf8; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; white-space: nowrap; font-weight: bold;">
+          Ver ↗
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BARRA FIXA NO RODAPÉ -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" id="btn-home" onclick="trocarAba('home')">
+    <span>🏠</span>
+    <span>Treino</span>
+  </button>
+  <button class="nav-btn" id="btn-evolucao" onclick="trocarAba('evolucao')">
+    <span>📈</span>
+    <span>Evolução</span>
+  </button>
+  <button class="nav-btn" id="btn-historico" onclick="trocarAba('historico')">
+    <span>📅</span>
+    <span>Histórico</span>
+  </button>
+  <button class="nav-btn" id="btn-ferramentas" onclick="trocarAba('ferramentas')">
+    <span>⚡</span>
+    <span>Ferramentas</span>
+  </button>
+</nav>
+
+<script src="script.js"></script>
+
+<!-- REGISTRO DO PWA -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
+</script>
+ 
+<!-- MODAL DE DETALHES DO TREINO -->
 <div id="modal-detalhes-dia" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
   <div style="background: #1e293b; border-radius: 12px; padding: 20px; width: 100%; max-width: 350px; border: 1px solid #334155; position: relative;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -229,7 +298,7 @@
   ⏱️
 </button>
 
-<!-- MODAL DO TIMER REFEITO -->
+<!-- MODAL DO TIMER -->
 <div id="modal-timer" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
   <div style="background: #1e293b; border-radius: 16px; padding: 24px; width: 100%; max-width: 300px; border: 1px solid #334155; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
     
@@ -238,7 +307,7 @@
       <button onclick="fecharModalTimer()" style="background: transparent; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer;">✕</button>
     </div>
 
-    <!-- Display do Tempo (Corrigido sem 'my') -->
+    <!-- Display do Tempo -->
     <div id="display-timer" style="font-size: 3.8rem; font-weight: bold; color: #f8fafc; font-family: monospace; margin: 10px 0; line-height: 1;">01:00</div>
 
     <!-- Ajuste Rápido (-10s / +30s) -->
@@ -262,7 +331,7 @@
 
   </div>
 </div>
-  
+ 
 <!-- MODAL DE CARD STORIES -->
 <div id="modal-stories" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; z-index: 1000; padding: 20px;">
   <div id="card-stories-conteudo" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border: 2px solid #38bdf8; border-radius: 20px; padding: 25px; width: 100%; max-width: 330px; text-align: center; box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);">
