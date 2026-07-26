@@ -14,6 +14,7 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
+  padding-bottom: 95px !important; /* Aumentado para garantir espaço na rolagem sobre o menu fixo */
 }
 
 .container {
@@ -302,6 +303,7 @@ body {
 .btn-salvar:hover {
   background-color: #059669;
 }
+
 .opcoes-dias {
   display: flex;
   flex-direction: column;
@@ -312,11 +314,8 @@ body {
 .opcoes-dias button {
   width: 100%;
 }
-/* ESPAÇAMENTO E ESTILO DA BARRA INFERIOR */
-body {
-  padding-bottom: 75px !important;
-}
 
+/* BARRA FIXA NO RODAPÉ */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -341,7 +340,7 @@ body {
   gap: 3px;
   font-size: 0.7rem;
   cursor: pointer;
-  width: 33%;
+  flex: 1; /* Distribui as 4 abas por igual */
   transition: color 0.2s ease;
 }
 
@@ -353,7 +352,8 @@ body {
   color: #38bdf8;
   font-weight: bold;
 }
-/* Estilos do Calendário */
+
+/* ESTILOS DO CALENDÁRIO */
 .dia-cal {
   padding: 8px 0;
   border-radius: 8px;
@@ -371,4 +371,14 @@ body {
 
 .dia-cal.hoje {
   border: 1px solid #38bdf8;
+}
+
+/* EFEITOS INTERATIVOS DE CLIQUE */
+a[target="_blank"], button {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+a[target="_blank"]:active, button:active {
+  transform: scale(0.97);
+  opacity: 0.9;
 }
