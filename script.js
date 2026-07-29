@@ -1,3 +1,93 @@
+// ==================== CONFIGURAÇÃO DO SUPABASE ====================
+const SUPABASE_URL = 'https://djeosnwexfhqaslavync.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_gDnjGmCo6qZKL0QpVtVuQA_s46ZwjoI';
+
+const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+
+// ==================== AUTHENTICATION & LOGIN GOOGLE ====================
+async function logarComGoogle() {
+  if (!supabaseClient) {
+    alert("Supabase não foi carregado corretamente!");
+    return;
+  }
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin + window.location.pathname
+    }
+  });
+  if (error) console.error("Erro ao fazer login:", error.message);
+}
+
+async function deslogar() {
+  if (!supabaseClient) return;
+  await supabaseClient.auth.signOut();
+  atualizarInterfaceUsuario(null);
+}
+
+function atualizarInterfaceUsuario(user) {
+  const statusDeslogado = document.getElementById('status-deslogado');
+  const statusLogado = document.getElementById('status-logado');
+  const userAvatar = document.getElementById('user-avatar');
+  const userNome = document.getElementById('user-nome');
+  const userEmail = document.getElementById('user-email');
+
+  if (user) {
+    if (statusDeslogado) statusDeslogado.classList.add('escondido');
+    if (statusLogado) statusLogado.classList.remove('escondido');
+
+    const meta = user.user_metadata || {};
+    if (userAvatar) userAvatar.src = meta.avatar_url || 'https://via.placeholder.com/38';
+    if (userNome) userNome.textContent = meta.full_name || meta.name || 'Usuário';
+    if (userEmail) userEmail.textContent = user.email || '';
+  } else {
+    if (statusDeslogado) statusDeslogado.classList.remove('escondido');
+    if (statusLogado) statusLogado.classList.add('escondido');
+  }
+}
+
+async function checarSessaoUsuario() {
+  if (!supabaseClient) return;
+  const { data: { user } } = await supabaseClient.auth.getUser();
+  atualizarInterfaceUsuario(user);
+}
+
+// ==================== SALVAR FREQUÊNCIA NO SUPABASE ====================
+async function salvarFrequencia(opcao) {
+  console.log("Selecionado:", opcao);
+
+  if (!supabaseClient) {
+    console.warn("Cliente do Supabase não inicializado.");
+    return;
+  }
+
+  try {
+    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+      console.warn("Usuário não está logado no Supabase. Frequência salva apenas localmente.");
+      return;
+    }
+
+    // Grava a opção do botão na tabela 'usuarios' ou 'configuracoes'
+    const { data, error } = await supabaseClient
+      .from('usuarios')
+      .upsert({
+        id: user.id,
+        frequencia_treino: opcao,
+        updated_at: new Date()
+      });
+
+    if (error) {
+      console.error("❌ Erro ao salvar frequência no Supabase:", error.message);
+    } else {
+      console.log("✅ Frequência salva no Supabase com sucesso!", data);
+    }
+  } catch (err) {
+    console.error("❌ Erro inesperado ao salvar frequência:", err);
+  }
+}
+
 // ==================== 1. BANCO DE DADOS DE TREINOS PRONTOS ====================
 const treinosBase = {
   3: {
@@ -119,7 +209,6 @@ function obterGrupoMuscular(nomeExercicio) {
 
 const todosExercicios = Object.values(bancoSugestoes).flat();
 
-// Auxiliar para pegar a data de hoje no formato ISO YYYY-MM-DD
 function getHojeISO() {
   const d = new Date();
   const year = d.getFullYear();
@@ -128,7 +217,6 @@ function getHojeISO() {
   return `${year}-${month}-${day}`;
 }
 
-// Formatador de exibição para datas ISO (YYYY-MM-DD -> DD/MM/YYYY)
 function formatarDataBR(dataISO) {
   if (!dataISO) return '';
   const partes = dataISO.split('-');
@@ -146,7 +234,6 @@ try {
 let diaAtivo = localStorage.getItem('devfit_dia_ativo') || "";
 let idEditando = null;
 
-// Registro de execuções concluídas por dia: { "YYYY-MM-DD": ["Supino Reto c/ Barra", ...] }
 function obterConcluidosHoje() {
   const hoje = getHojeISO();
   const registro = JSON.parse(localStorage.getItem('devfit_concluidos_diarios')) || {};
@@ -347,14 +434,16 @@ function toggleConcluido(index) {
 // ==================== 5. MANIPULAÇÃO DE DADOS E FORMULÁRIOS ====================
 function configurarAutocompleteInputForm() {
   const exercicioInput = document.getElementById('exercicio');
+  let datalistForm = document.getElementById('lista-todos-exercicios');
+  
+  if (!datalistForm) {
+    datalistForm = document.createElement('datalist');
+    datalistForm.id = 'lista-todos-exercicios';
+    datalistForm.innerHTML = todosExercicios.map(ex => `<option value="${ex}">`).join('');
+    document.body.appendChild(datalistForm);
+  }
+
   if (exercicioInput) {
-    let datalistForm = document.getElementById('lista-todos-exercicios');
-    if (!datalistForm) {
-      datalistForm = document.createElement('datalist');
-      datalistForm.id = 'lista-todos-exercicios';
-      datalistForm.innerHTML = todosExercicios.map(ex => `<option value="${ex}">`).join('');
-      document.body.appendChild(datalistForm);
-    }
     exercicioInput.setAttribute('list', 'lista-todos-exercicios');
   }
 }
@@ -374,15 +463,13 @@ function salvarEdicao(index) {
   const novaCarga = Number(document.getElementById(`edit-carga-${index}`).value);
   const novasReps = Number(document.getElementById(`edit-reps-${index}`).value);
 
-  // Validação para nome vazio
   if (!novoNome) {
     alert("O nome do exercício não pode ficar em branco!");
     return;
   }
 
-  // Validação para carga/reps inválidas
   if (novaCarga < 0 || novasReps <= 0) {
-    alert("Informe valores válidos! A carga não pode ser negativa e as repetições devem ser maiores que 0.");
+    alert("Informe valores válidos!");
     return;
   }
 
@@ -426,53 +513,72 @@ function toggleFormulario() {
   if (form) form.classList.toggle('escondido');
 }
 
-const formTreino = document.getElementById('form-treino');
-if (formTreino) {
-  formTreino.addEventListener('submit', (e) => {
-    e.preventDefault();
+// EVENT LISTENER INICIAL
+document.addEventListener('DOMContentLoaded', () => {
+  renderizarTelas();
+  checarSessaoUsuario();
 
-    const exercicioInput = document.getElementById('exercicio');
-    const cargaInput = document.getElementById('carga');
-    const repsInput = document.getElementById('reps');
+  const formTreino = document.getElementById('form-treino');
+  if (formTreino) {
+    formTreino.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    const nomeTratado = exercicioInput.value.trim();
-    const cargaVal = Number(cargaInput.value);
-    const repsVal = Number(repsInput.value);
+      const exercicioInput = document.getElementById('exercicio');
+      const cargaInput = document.getElementById('carga');
+      const repsInput = document.getElementById('reps');
 
-    // Validação de campo vazio
-    if (!nomeTratado) {
-      alert("Digite o nome do exercício!");
-      return;
-    }
+      const nomeTratado = exercicioInput.value.trim();
+      const cargaVal = Number(cargaInput.value);
+      const repsVal = Number(repsInput.value);
 
-    // Validação de valores inválidos ou zerados
-    if (cargaVal < 0 || repsVal <= 0) {
-      alert("A carga não pode ser negativa e as repetições devem ser maiores que 0!");
-      return;
-    }
+      if (!nomeTratado) {
+        alert("Digite o nome do exercício!");
+        return;
+      }
 
-    const novoItem = {
-      id: Date.now(),
-      exercicio: nomeTratado,
-      carga: cargaVal,
-      reps: repsVal,
-      concluido: false
-    };
+      if (cargaVal < 0 || repsVal <= 0) {
+        alert("A carga não pode ser negativa e as repetições devem ser maiores que 0!");
+        return;
+      }
 
-    if (!planoAtual[diaAtivo]) {
-      planoAtual[diaAtivo] = [];
-    }
+      const novoItem = {
+        id: Date.now(),
+        exercicio: nomeTratado,
+        carga: cargaVal,
+        reps: repsVal,
+        concluido: false
+      };
 
-    planoAtual[diaAtivo].push(novoItem);
-    
-    exercicioInput.value = '';
-    cargaInput.value = '';
-    repsInput.value = '';
-    toggleFormulario();
+      if (!planoAtual[diaAtivo]) {
+        planoAtual[diaAtivo] = [];
+      }
 
-    salvarEAtualizar();
-  });
-}
+      planoAtual[diaAtivo].push(novoItem);
+      salvarEAtualizar();
+
+      // Envio ao Supabase
+      if (supabaseClient) {
+        try {
+          await supabaseClient
+            .from('treinos')
+            .insert([{ exercicio: nomeTratado, carga: cargaVal, repeticoes: repsVal }]);
+        } catch (err) {
+          console.warn("Erro ao salvar no Supabase:", err);
+        }
+      }
+
+      exercicioInput.value = '';
+      cargaInput.value = '';
+      repsInput.value = '';
+      toggleFormulario();
+    });
+  }
+  
+  const formPersonal = document.getElementById('form-criar-treino-personal');
+  if (formPersonal) {
+    formPersonal.addEventListener('submit', salvarTreinoPersonal);
+  }
+});
 
 function voltarParaSetup() {
   if (confirm("Quer alterar a frequência? Seu treino atual será redefinido.")) {
@@ -491,7 +597,7 @@ function salvarEAtualizar() {
   renderizarTelas();
 }
 
-// ==================== 6. GRÁFICOS E HISTÓRICO COM DATA ISO ====================
+// ==================== 6. GRÁFICOS E HISTÓRICO ====================
 let meuGrafico = null;
 
 function obterHistoricoCargas() {
@@ -501,7 +607,7 @@ function obterHistoricoCargas() {
 
 function registrarCargaNoHistorico(nomeExercicio, carga) {
   const historico = obterHistoricoCargas();
-  const hojeISO = getHojeISO(); // Ex: "2026-07-26"
+  const hojeISO = getHojeISO();
 
   if (!historico[nomeExercicio]) {
     historico[nomeExercicio] = [];
@@ -547,7 +653,6 @@ function atualizarGrafico() {
   const historico = obterHistoricoCargas();
   const dadosExercicio = historico[exercicioSelecionado] || [];
 
-  // Ordena cronologicamente antes de renderizar
   dadosExercicio.sort((a, b) => a.data.localeCompare(b.data));
 
   const labels = dadosExercicio.map(item => formatarDataBR(item.data));
@@ -588,8 +693,8 @@ function atualizarGrafico() {
   });
 }
 
-// ==================== RECORDES PESSOAIS (PRs) COM FILTRO E SCROLL ====================
-let listaPRsCache = []; // Cache local para busca rápida
+// ==================== 7. RECORDES PESSOAIS (PRs) ====================
+let listaPRsCache = [];
 
 function atualizarEExibirPRs() {
   const historico = obterHistoricoCargas();
@@ -637,7 +742,7 @@ function filtrarPRs() {
   renderizarListaPRs(filtrados);
 }
 
-// ==================== 8. CALENDÁRIO COM COMPATIBILIDADE DE DATA ====================
+// ==================== 8. CALENDÁRIO ====================
 function obtainingHistoricoOrganizadoPorData() {
   const historicoBruto = obterHistoricoCargas();
   const porData = {};
@@ -782,7 +887,7 @@ function alternarTimer() {
           navigator.vibrate([500, 200, 500]);
         }
 
-        alert('⏱️ Hora do Descanso acabou! Bora pra próxima série!');
+        alert('⏱️ Descanso finalizado!');
         resetarTimer();
       }
     }, 1000);
@@ -839,82 +944,126 @@ function fecharModalStories() {
   if (modal) modal.style.display = 'none';
 }
 
-// ==================== 11. SISTEMA DE BACKUP (EXPORTAR / IMPORTAR) ====================
-function exportarDados() {
-  const dados = {
-    plano: localStorage.getItem('devfit_plano'),
-    diaAtivo: localStorage.getItem('devfit_dia_ativo'),
-    historicoCargas: localStorage.getItem('devfit_historico_cargas'),
-    concluidosDiarios: localStorage.getItem('devfit_concluidos_diarios')
-  };
+// ==================== 11. CALCULADORA DE SUPLEMENTAÇÃO ====================
+function calcularSuplementacao() {
+  const pesoInput = document.getElementById('peso-usuario');
+  const resContainer = document.getElementById('resultado-calc');
+  const resCreatina = document.getElementById('res-creatina');
+  const resProteina = document.getElementById('res-proteina');
 
-  const jsonStr = JSON.stringify(dados, null, 2);
-  const blob = new Blob([jsonStr], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `backup_devfit_${getHojeISO()}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
+  if (!pesoInput) {
+    alert("Campo de peso não encontrado!");
+    return;
+  }
+
+  const peso = parseFloat(pesoInput.value);
+
+  if (!peso || peso <= 0) {
+    alert("Por favor, digite um peso válido!");
+    return;
+  }
+
+  const doseCreatina = (peso * 0.07).toFixed(1);
+  const doseProteina = Math.round(peso * 2.0);
+
+  if (resCreatina) resCreatina.textContent = `${doseCreatina}g / dia`;
+  if (resProteina) resProteina.textContent = `${doseProteina}g / dia`;
+
+  if (resContainer) {
+    resContainer.classList.remove('escondido');
+    resContainer.style.display = 'block';
+  }
 }
 
-function importarDados(e) {
-  const file = e.target.files[0];
-  if (!file) return;
+// ==================== 12. MÓDULO PERSONAL & SUPABASE ====================
+function adicionarCampoExercicioPersonal() {
+  const container = document.getElementById('lista-exercicios-personal');
+  if (!container) return;
 
-  const reader = new FileReader();
-  reader.onload = function(evt) {
-    try {
-      const dados = JSON.parse(evt.target.result);
-      if (dados.plano) localStorage.setItem('devfit_plano', dados.plano);
-      if (dados.diaAtivo) localStorage.setItem('devfit_dia_ativo', dados.diaAtivo);
-      if (dados.historicoCargas) localStorage.setItem('devfit_historico_cargas', dados.historicoCargas);
-      if (dados.concluidosDiarios) localStorage.setItem('devfit_concluidos_diarios', dados.concluidosDiarios);
+  const novoItem = document.createElement('div');
+  novoItem.className = 'item-exercicio-form';
+  novoItem.style.cssText = 'background: #0f172a; padding: 10px; border-radius: 8px; border: 1px solid #334155; display: flex; flex-direction: column; gap: 8px; margin-top: 8px;';
+  novoItem.innerHTML = `
+    <input type="text" placeholder="Nome do Exercício" class="input-ex-nome" required style="width: 100%; padding: 8px; background: #1e293b; border: 1px solid #334155; color: white; border-radius: 4px; box-sizing: border-box;">
+    <div style="display: flex; gap: 8px;">
+      <input type="number" placeholder="Séries" class="input-ex-series" required style="flex: 1; padding: 8px; background: #1e293b; border: 1px solid #334155; color: white; border-radius: 4px; box-sizing: border-box;">
+      <input type="text" placeholder="Reps" class="input-ex-reps" required style="flex: 1; padding: 8px; background: #1e293b; border: 1px solid #334155; color: white; border-radius: 4px; box-sizing: border-box;">
+    </div>
+  `;
+  container.appendChild(novoItem);
+}
 
-      alert('✅ Backup restaurado com sucesso!');
-      window.location.reload();
-    } catch(err) {
-      alert('❌ Arquivo de backup inválido.');
+async function salvarTreinoPersonal(e) {
+  if (e) e.preventDefault();
+  
+  const titulo = document.getElementById('personal-titulo').value.trim();
+  const categoria = document.getElementById('personal-categoria').value;
+  
+  const itens = document.querySelectorAll('#lista-exercicios-personal .item-exercicio-form');
+  const exercicios = [];
+
+  itens.forEach(item => {
+    const nome = item.querySelector('.input-ex-nome').value.trim();
+    const series = item.querySelector('.input-ex-series').value;
+    const reps = item.querySelector('.input-ex-reps').value;
+    if (nome) {
+      exercicios.push({ exercicio: nome, series, reps, carga: 0 });
     }
-  };
-  reader.readAsText(file);
+  });
+
+  if (!titulo || exercicios.length === 0) {
+    alert("Preencha o título e pelo menos 1 exercício!");
+    return;
+  }
+
+  const codigo = 'FIT-' + Math.floor(1000 + Math.random() * 9000);
+
+  if (supabaseClient) {
+    try {
+      const { error } = await supabaseClient
+        .from('fichas_personal')
+        .insert([{ codigo, titulo, categoria, exercicios }]);
+
+      if (error) throw error;
+
+      alert(`Ficha gerada com sucesso! Código para o aluno: ${codigo}`);
+    } catch (err) {
+      console.warn("Erro ao salvar no banco, gerando apenas local:", err);
+      alert(`Ficha criada localmente! Código: ${codigo}`);
+    }
+  }
 }
 
-// ==================== 12. INICIALIZAÇÃO ====================
-document.addEventListener('DOMContentLoaded', () => {
-  renderizarTelas();
-});
-// LÓGICA DA CALCULADORA DE SUPLEMENTAÇÃO
-document.addEventListener('DOMContentLoaded', () => {
-  const btnCalcular = document.getElementById('btn-calcular-suple');
-  
-  if (btnCalcular) {
-    btnCalcular.addEventListener('click', () => {
-      const pesoInput = document.getElementById('peso-usuario');
-      const peso = parseFloat(pesoInput.value);
+async function importarTreinoPorCodigo() {
+  const codigoInput = document.getElementById('input-codigo-aluno');
+  if (!codigoInput) return;
 
-      if (!peso || peso <= 0) {
-        alert('Por favor, insira um peso válido!');
+  const codigo = codigoInput.value.trim().toUpperCase();
+  if (!codigo) {
+    alert("Digite o código da ficha!");
+    return;
+  }
+
+  if (supabaseClient) {
+    try {
+      const { data, error } = await supabaseClient
+        .from('fichas_personal')
+        .select('*')
+        .eq('codigo', codigo)
+        .single();
+
+      if (error || !data) {
+        alert("Ficha não encontrada. Verifique o código!");
         return;
       }
 
-      // Cálculos recomendados:
-      // Creatina: ~0.07g por kg
-      // Proteína: ~2.0g por kg (meta de hipertrofia)
-      const doseCreatina = (peso * 0.07).toFixed(1);
-      const doseProteina = Math.round(peso * 2.0);
-
-      // Exibe os valores na tela
-      document.getElementById('res-creatina').innerText = `${doseCreatina}g / dia`;
-      document.getElementById('res-proteina').innerText = `${doseProteina}g / dia`;
-
-      // Mostra o container de resultados
-      const caixaResultado = document.getElementById('resultado-calc');
-      caixaResultado.classList.remove('escondido');
-    });
+      const nomeDia = `Treino ${data.categoria} (${data.titulo})`;
+      planoAtual[nomeDia] = data.exercicios;
+      salvarEAtualizar();
+      alert(`Ficha "${data.titulo}" importada com sucesso!`);
+    } catch (err) {
+      console.error("Erro ao importar ficha:", err);
+      alert("Erro ao buscar a ficha no banco de dados.");
+    }
   }
-});
-
-
-  
+}
